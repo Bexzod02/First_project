@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row" style="margin-left:30px">
+    <div class="col-md-6">
+    <header style = "margin:20px 20px">
+        <a href = " {% url 'base' %}" >Bosh Sahifa </a>
+    </header>
+    {% if obj %}
+    <a href = "/articles/{{obj.slug}}">{{ obj.title }} - {{ obj.content }}</a>
+    {% else %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% comment %} <div style="margin-top:20px">
+                <input type="text", name="title", placeholder="title">
+            </div>
+            <div style="margin-top:20px">
+                <textarea name="content", rows="3", placeholder="content"></textarea>
+            </div> {% endcomment %}
+            {{ form.as_p}}
+            <div class="d-grid gap-2">
+                <button style = "margin-top:10px ", class="btn btn-primary", type="submit" >Create article</button>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
